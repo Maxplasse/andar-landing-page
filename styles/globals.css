@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Inclusive+Sans:wght@400;500&family=Montserrat:wght@400;700&display=swap');
+
+:root {
+  --color-primary: #AB1851;
+  --color-secondary: #4DB5C5;
+  --color-accent: #E69A00;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: 'Inter', sans-serif;
+  max-width: 100vw;
+  overflow-x: hidden;
+  color: var(--color-black);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.btn {
+  display: inline-block;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.glass-effect {
+  position: relative;
+  background: linear-gradient(45deg, rgba(171, 24, 81, 0.08), rgba(171, 24, 81, 0.19));
+  backdrop-filter: blur(40px);
+  border-radius: 10px;
+  margin-right: -150px; 
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+} 
