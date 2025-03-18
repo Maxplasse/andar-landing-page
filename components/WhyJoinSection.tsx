@@ -69,6 +69,14 @@ const BenefitText = styled.p`
   color: var(--color-black);
 `;
 
+const OrangeText = styled.span`
+  color: #E99900;
+`;
+
+const PurpleText = styled.span`
+  color: #AB1851;
+`;
+
 const ImageContainer = styled.div`
   flex: 1;
   position: relative;
@@ -77,15 +85,22 @@ const ImageContainer = styled.div`
   overflow: hidden;
 `;
 
+const HighlightedTextOrange = styled.span`
+  background-color: #E99900;
+  color: white;
+  padding: 0 10px;
+  border-radius: 4px;
+`;
+
 const WhyJoinSection: React.FC = () => {
   return (
     <SectionContainer>
-      <SectionTitle>Pourquoi adhérer à l'ANDAR ?</SectionTitle>
+      <SectionTitle>Pourquoi <HighlightedTextOrange>adhérer</HighlightedTextOrange> à l'ANDAR ?</SectionTitle>
       
       <BenefitsContainer>
         <BenefitRow>
           <BenefitContent>
-            <BenefitTitle>Un accès privilégié à l'information</BenefitTitle>
+            <BenefitTitle>Un <OrangeText>accès privilégié</OrangeText> à l'information</BenefitTitle>
             <BenefitText>
               En tant qu'adhérent, vous accédez aux revues ANDAR Infos, aux brochures pratiques et avez accès à MaPatho Plus, notre outil de suivi personnalisé.
             </BenefitText>
@@ -102,7 +117,7 @@ const WhyJoinSection: React.FC = () => {
 
         <BenefitRow>
           <BenefitContent>
-            <BenefitTitle>Un soutien direct aux actions de l'ANDAR</BenefitTitle>
+            <BenefitTitle>Un <PurpleText>soutien direct</PurpleText> aux actions de l'ANDAR</BenefitTitle>
             <BenefitText>
               Votre adhésion permet de financer nos actions : sensibilisation du grand public, défense des droits des patients, recherche et accompagnement des malades.
             </BenefitText>

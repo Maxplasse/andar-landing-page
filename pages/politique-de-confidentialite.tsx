@@ -91,18 +91,14 @@ export default function PolitiqueDeConfidentialite() {
         </Paragraph>
         
         <Paragraph><strong>Conception</strong><br />
-          Société : Alteriade<br />
-          73 cours Albert Thomas<br />
-          69003 Lyon
-        </Paragraph>
-        
-        <Paragraph>
-          Tél. : +33 (0)4 78 64 97 74<br />
-          Mail : contact@alteriade.fr
+          Digilityx<br />
+          25 Rue Drouot<br />
+          75009 Paris<br />
+          Mail : info@digilityx.com
         </Paragraph>
         
         <Paragraph><strong>Hébergement</strong><br />
-          Ce site est hébergé par la société à responsabilité limitée ALWAYSDATA, ayant son siège social au 62 rue Tiquetonne, 75002 Paris (tél. +33 1 84 16 23 40).
+        Ce site est hébergé par la société Vercel Inc., ayant son siège social au 340 S Lemon Ave #4133, Walnut, CA 91789, USA.
         </Paragraph>
         
         <SectionTitle>2. Conditions générales d'utilisation du site et des services proposés.</SectionTitle>

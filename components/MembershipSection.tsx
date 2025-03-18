@@ -32,6 +32,13 @@ const MembershipCardsContainer = styled.div`
   }
 `;
 
+const HighlightedText = styled.span`
+  background-color: #AB1851;
+  color: white;
+  padding: 0 10px;
+  border-radius: 4px;
+`;
+
 const MembershipCard = styled.div<{ variant: 'digital' | 'classic' }>`
   border: 1px solid var(--color-black);
   border-radius: 18px;
@@ -197,7 +204,7 @@ const MembershipSection: React.FC = () => {
   
   return (
     <SectionContainer id="adhesion">
-      <SectionTitle>Quelles formules d'adhésion à l'ANDAR ?</SectionTitle>
+      <SectionTitle>Quelles <HighlightedText>formules d'adhésion</HighlightedText> à l'ANDAR ?</SectionTitle>
       
       <MembershipCardsContainer>
         <MembershipCard variant="digital">
