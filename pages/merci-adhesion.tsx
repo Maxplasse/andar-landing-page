@@ -12,23 +12,35 @@ const PageContainer = styled.div`
   flex-direction: column;
 `;
 
-const ThankYouContainer = styled.div`
-  flex: 1;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 100px 20px;
-  text-align: center;
-  
-  @media (max-width: 768px) {
-    padding: 80px 15px;
-  }
+const Header = styled.header`
+  background-color: var(--color-primary);
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
 `;
 
 const Logo = styled.div`
   position: relative;
   width: 250px;
   height: 100px;
-  margin: 0 auto 40px;
+  margin: 0 auto;
+`;
+
+const ThankYouContainer = styled.div`
+  flex: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+  
+  @media (max-width: 768px) {
+    padding: 40px 15px;
+  }
 `;
 
 const PageTitle = styled.h1`
@@ -128,16 +140,18 @@ const MerciAdhesion: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <ThankYouContainer>
+      <Header>
         <Logo>
           <Image 
-            src="/images/logo_andar.png" 
+            src="/images/logo_andar_blanc.png" 
             alt="ANDAR Logo" 
             fill
             style={{ objectFit: 'contain' }}
           />
         </Logo>
-        
+      </Header>
+      
+      <ThankYouContainer>
         <PageTitle>Merci pour votre adhésion !</PageTitle>
         
         <ThankYouMessage>

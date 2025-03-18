@@ -82,17 +82,16 @@ export default function MentionsLegales() {
         
         <SectionTitle>Conception et réalisation</SectionTitle>
         <Paragraph>
-          <strong>Alteriade</strong><br />
-          73 cours Albert Thomas<br />
-          69003 Lyon<br /><br />
-          
-          Tél. : +33 (0)4 78 64 97 74<br />
-          Email : contact@alteriade.fr
+          <strong>Digilityx</strong><br />
+          25 Rue Drouot<br />
+          75009 Paris<br /><br />
+
+          Email : info@digilityx.com
         </Paragraph>
         
         <SectionTitle>Hébergement</SectionTitle>
         <Paragraph>
-          Ce site est hébergé par la société à responsabilité limitée ALWAYSDATA, ayant son siège social au 62 rue Tiquetonne, 75002 Paris (tél. +33 1 84 16 23 40).
+          Ce site est hébergé par la société Vercel Inc., ayant son siège social au 340 S Lemon Ave #4133, Walnut, CA 91789, USA.
         </Paragraph>
         
         <SectionTitle>Propriété intellectuelle</SectionTitle>
