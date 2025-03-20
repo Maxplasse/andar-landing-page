@@ -30,17 +30,11 @@ const MissionsGrid = styled.div`
   gap: 10px;
   
   @media (max-width: 992px) {
-    overflow-x: auto;
-    padding-bottom: 20px;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    &::-webkit-scrollbar {
-      height: 6px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(255, 255, 255, 0.3);
-      border-radius: 3px;
-    }
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    overflow-x: hidden;
+    padding-bottom: 0;
   }
 `;
 
@@ -60,8 +54,10 @@ const MissionItem = styled.div`
   }
   
   @media (max-width: 992px) {
-    min-width: 220px;
-    flex-shrink: 0;
+    width: 100%;
+    max-width: 300px;
+    min-width: unset;
+    height: 240px;
   }
 `;
 
@@ -96,6 +92,7 @@ const IconContainer = styled.div`
   height: 60px;
   position: relative;
   margin-bottom: 10px;
+  z-index: 5;
 `;
 
 const MissionTitle = styled.h3`
@@ -164,6 +161,8 @@ const MissionsSection: React.FC = () => {
                     src={mission.icon} 
                     alt={mission.title}
                     fill
+                    sizes="60px"
+                    priority
                     style={{ objectFit: 'contain' }}
                   />
                 </IconContainer>

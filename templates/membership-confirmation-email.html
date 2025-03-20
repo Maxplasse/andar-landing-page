@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation d'adhésion ANDAR</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header-logo {
+            max-width: 200px;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .greeting {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .message {
+            margin-bottom: 25px;
+        }
+        
+        .membership-details {
+            background-color: #f4f9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .detail-item {
+            margin-bottom: 12px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .detail-value {
+            color: #333333;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+            border-top: 1px solid #eeeeee;
+        }
+        
+        .social-icons {
+            margin: 15px 0;
+        }
+        
+        .social-icon {
+            display: inline-block;
+            margin: 0 8px;
+        }
+        
+        .contact-info {
+            margin-top: 15px;
+        }
+        
+        @media only screen and (max-width: 480px) {
+            .container {
+                width: 100% !important;
+            }
+            
+            .content {
+                padding: 20px 15px !important;
+            }
+            
+            .header h1 {
+                font-size: 22px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://www.andar.fr/wp-content/uploads/2023/01/logo-andar-blanc.png" alt="ANDAR Logo" class="header-logo">
+            <h1>Confirmation d'Adhésion</h1>
+        </div>
+        
+        <div class="content">
+            <div class="greeting">
+                Bonjour {{params.name}},
+            </div>
+            
+            <div class="message">
+                <p>Nous vous remercions pour votre adhésion à ANDAR ! Nous sommes ravis de vous compter parmi nos membres.</p>
+                <p>Votre soutien est essentiel pour nous permettre de continuer nos actions et de développer nos services pour tous les patients atteints de polyarthrite rhumatoïde.</p>
+            </div>
+            
+            <div class="membership-details">
+                <div class="detail-item">
+                    <span class="detail-label">Type d'adhésion :</span> 
+                    <span class="detail-value">{{params.membershipDetails.name}}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Montant :</span> 
+                    <span class="detail-value">{{params.membershipDetails.price}}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Avantages :</span> 
+                    <span class="detail-value">{{params.membershipDetails.description}}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Durée :</span> 
+                    <span class="detail-value">{{params.membershipDetails.duration}}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Date d'adhésion :</span> 
+                    <span class="detail-value">{{params.date}}</span>
+                </div>
+            </div>
+            
+            <p>Vous recevrez prochainement un email avec tous les détails concernant votre espace membre et les avantages auxquels vous avez droit.</p>
+            
+            <p>Pour toute question concernant votre adhésion, n'hésitez pas à contacter notre équipe.</p>
+            
+            <a href="https://www.andar.fr/mon-compte" class="cta-button">Accéder à Mon Espace Membre</a>
+            
+            <p>Merci encore pour votre confiance et votre soutien !</p>
+            
+            <p>Cordialement,<br>
+            L'équipe ANDAR</p>
+        </div>
+        
+        <div class="footer">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/andarfrance/" class="social-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174848.png" alt="Facebook" width="24">
+                </a>
+                <a href="https://twitter.com/andarfrance" class="social-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="24">
+                </a>
+                <a href="https://www.instagram.com/andarfrance/" class="social-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="24">
+                </a>
+            </div>
+            
+            <div class="contact-info">
+                <p>Association Nationale de Défense contre l'Arthrite Rhumatoïde (ANDAR)<br>
+                150 Route de Ferney, 69330 Lyon, France<br>
+                Email: contact@andar.fr | Tél: 01 23 45 67 89</p>
+                
+                <p>© 2023 ANDAR - Tous droits réservés</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

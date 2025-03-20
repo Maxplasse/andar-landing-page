@@ -17,10 +17,19 @@ const SectionTitle = styled.h2`
   font-weight: 700;
   font-size: 42px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   line-height: 1.21;
   color: var(--color-black);
   margin-bottom: 50px;
+  
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 28px;
+  }
 `;
 
 const BenefitsContainer = styled.div`
@@ -36,6 +45,7 @@ const BenefitRow = styled.div`
 
   @media (max-width: 992px) {
     flex-direction: column;
+    gap: 30px;
   }
 
   &:nth-child(even) {
@@ -49,6 +59,10 @@ const BenefitRow = styled.div`
 
 const BenefitContent = styled.div`
   flex: 1;
+  
+  @media (max-width: 992px) {
+    width: 100%;
+  }
 `;
 
 const BenefitTitle = styled.h3`
@@ -80,9 +94,21 @@ const PurpleText = styled.span`
 const ImageContainer = styled.div`
   flex: 1;
   position: relative;
-  min-height: 300px;
+  height: 350px;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  
+  @media (max-width: 992px) {
+    width: 100%;
+    height: 250px;
+  }
+`;
+
+const StyledImage = styled(Image)`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 `;
 
 const HighlightedTextOrange = styled.span`
@@ -90,6 +116,21 @@ const HighlightedTextOrange = styled.span`
   color: white;
   padding: 0 10px;
   border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  margin: 0 5px;
+  
+  @media (max-width: 768px) {
+    padding: 0 8px;
+    white-space: normal;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 6px;
+    white-space: normal;
+    display: inline;
+  }
 `;
 
 const WhyJoinSection: React.FC = () => {
@@ -110,7 +151,8 @@ const WhyJoinSection: React.FC = () => {
               src="/images/andar_accompagnement.png"
               alt="ANDAR Accompagnement"
               fill
-              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 992px) 100vw, 50vw"
+              priority
             />
           </ImageContainer>
         </BenefitRow>
@@ -127,7 +169,8 @@ const WhyJoinSection: React.FC = () => {
               src="/images/img_financement.png"
               alt="Financement ANDAR"
               fill
-              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 992px) 100vw, 50vw"
+              priority
             />
           </ImageContainer>
         </BenefitRow>

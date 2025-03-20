@@ -25,12 +25,23 @@ const HeaderContainer = styled.header<HeaderContainerProps>`
   /* These properties will be dynamically applied based on scroll state */
   transform: ${props => props.hidden ? 'translateY(-100%)' : 'translateY(0)'};
   background-color: ${props => props.scrolled ? 'var(--color-secondary)' : 'transparent'};
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 15px 20px;
+    gap: 15px;
+  }
 `;
 
 const Logo = styled.div`
   position: relative;
   width: 250px;
   height: 100px;
+  
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 80px;
+  }
 `;
 
 const JoinButton = styled.button`
@@ -48,6 +59,11 @@ const JoinButton = styled.button`
   &:hover {
     opacity: 0.9;
     transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 10px 30px;
+    font-size: 18px;
   }
 `;
 

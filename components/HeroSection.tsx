@@ -48,7 +48,7 @@ const drawUnderline = keyframes`
 const TextContainer = styled.span`
   position: relative;
   display: inline-flex;
-  padding-bottom: 10px; /* Increased to accommodate thicker line */
+  padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
 `;
@@ -66,6 +66,14 @@ const HighlightedText = styled.span`
   color: white;
   padding: 0 10px;
   border-radius: 4px;
+  display: inline-block;
+  white-space: nowrap;
+  
+  @media (max-width: 480px) {
+    display: inline;
+    white-space: normal;
+    padding: 2px 6px;
+  }
 `;
 
 const HighlightedTextOrange = styled.span`
@@ -73,6 +81,14 @@ const HighlightedTextOrange = styled.span`
   color: white;
   padding: 0 10px;
   border-radius: 4px;
+  display: inline-block;
+  white-space: nowrap;
+  
+  @media (max-width: 480px) {
+    display: inline;
+    white-space: normal;
+    padding: 2px 6px;
+  }
 `;
 
 const UnderlineSVG = styled.svg`

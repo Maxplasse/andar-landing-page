@@ -159,7 +159,7 @@ const MembershipSection: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            priceId: 'price_1R2VU8C4dgSURMJVPD4tG9pP', // Digital membership price ID
+            priceId: 'price_1R4eb6Cw2RExVENhDbJpEgyB', // Digital membership price ID
             successUrl: `${baseUrl}/merci-adhesion?type=digital`,
             cancelUrl: `${baseUrl}/#adhesion`
           }),
@@ -171,7 +171,7 @@ const MembershipSection: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            priceId: 'price_1R430AC4dgSURMJVkCXPOCvK', // Classic membership price ID
+            priceId: 'price_1R4ec7Cw2RExVENhBXUIPDoL', // Classic membership price ID
             successUrl: `${baseUrl}/merci-adhesion?type=classic`,
             cancelUrl: `${baseUrl}/#adhesion`
           }),
@@ -225,8 +225,7 @@ const MembershipSection: React.FC = () => {
           )}
           
           <CardFeatures>
-            <CardFeature><span>Soutien</span> à 350 000 malades</CardFeature>
-            <CardFeature><span>Revue</span> ANDAR Infos (3/an)</CardFeature>
+            <CardFeature><span>Revue</span> ANDAR numérique</CardFeature>
             <CardFeature><span>Webconférences</span> illimitées</CardFeature>
             <CardFeature><span>Ressources</span> dédiées (brochures et documents)</CardFeature>
             <CardFeature><span>Accès</span> MaPatho Plus (outil pour gérer vos parcours soins)</CardFeature>

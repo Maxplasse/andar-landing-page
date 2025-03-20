@@ -2,6 +2,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
+// Helper to determine if we're in production mode
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Select the appropriate Stripe keys based on environment
+const getStripeKey = () => {
+  if (isProduction && process.env.STRIPE_LIVE_SECRET_KEY) {
+    return process.env.STRIPE_LIVE_SECRET_KEY;
+  }
+  return process.env.STRIPE_SECRET_KEY;
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -15,7 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: 'Missing required parameters' });
     }
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+    const secretKey = getStripeKey();
+    const stripe = new Stripe(secretKey as string, {
       apiVersion: '2023-10-16' as any,
     });
 
@@ -36,8 +48,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Add metadata if needed
       metadata: {
         source: 'andar_website',
+        environment: isProduction ? 'production' : 'test'
       },
     });
+
+    console.log(`Payment link created:
+      ID: ${paymentLink.id}
+      URL: ${paymentLink.url}
+      Environment: ${isProduction ? 'Production' : 'Test'}
+    `);
 
     res.status(200).json({
       id: paymentLink.id,
