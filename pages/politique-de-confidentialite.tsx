@@ -98,7 +98,7 @@ export default function PolitiqueDeConfidentialite() {
         </Paragraph>
         
         <Paragraph><strong>Hébergement</strong><br />
-        Ce site est hébergé par la société Vercel Inc., ayant son siège social au 340 S Lemon Ave #4133, Walnut, CA 91789, USA.
+        Ce site est hébergé par la société à responsabilité limitée ALWAYSDATA, ayant son siège social au 62 rue Tiquetonne, 75002 Paris (tél. +33 1 84 16 23 40).
         </Paragraph>
         
         <SectionTitle>2. Conditions générales d'utilisation du site et des services proposés.</SectionTitle>

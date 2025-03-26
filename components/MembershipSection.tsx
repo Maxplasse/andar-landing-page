@@ -219,6 +219,7 @@ const MembershipSection: React.FC = () => {
               variant="digital"
               target="_blank"
               rel="noopener noreferrer"
+              className="btn-adhesion-digital"
             >
               J'adhère
             </JoinButton>
@@ -244,6 +245,7 @@ const MembershipSection: React.FC = () => {
               variant="classic"
               target="_blank"
               rel="noopener noreferrer"
+              className="btn-adhesion-classic"
             >
               J'adhère
             </JoinButton>

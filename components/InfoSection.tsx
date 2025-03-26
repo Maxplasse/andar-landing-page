@@ -95,8 +95,9 @@ const InfoSection: React.FC = () => {
         <GlassCard>
           <InfoTitle>La polyarthrite rhumatoïde, quèsaco ?</InfoTitle>
           <InfoText>
-            Cette maladie inflammatoire auto-immune touche les articulations. L'inflammation peut causer des dommages irréparables, des déformations et, à terme, des handicaps. Malgré les immenses progrès des traitements, on ne peut à ce jour pas guérir de cette maladie.
             <br /><br />
+            Cette maladie inflammatoire auto-immune touche les articulations. L'inflammation peut causer des dommages irréparables, des déformations et, à terme, des handicaps. Malgré les immenses progrès des traitements, on ne peut à ce jour pas guérir de cette maladie.
+            <br /><br />a
             Manque de connaissance, incompréhension de l'entourage, solitude, les malades se retrouvent souvent isolés et démunis face à la douleur et à la fatigue causées par la polyarthrite.
           </InfoText>
         </GlassCard>
