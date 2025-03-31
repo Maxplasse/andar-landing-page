@@ -85,9 +85,18 @@ async function sendConfirmationEmail(email: string, name: string, membershipType
     console.error('WEBHOOK-DEBUG: ❌ Error sending email:', error);
     
     // Log detailed error information
-    if (error.response) {
-      console.error('WEBHOOK-DEBUG: Error status:', error.response.status);
-      console.error('WEBHOOK-DEBUG: Error details:', error.response.text || JSON.stringify(error.response.data));
+    if (error && typeof error === 'object' && 'response' in error && 
+        error.response && typeof error.response === 'object') {
+      if ('status' in error.response) {
+        console.error('WEBHOOK-DEBUG: Error status:', error.response.status);
+      }
+      let errorDetails = '';
+      if ('text' in error.response && error.response.text && typeof error.response.text === 'string') {
+        errorDetails = error.response.text;
+      } else if ('data' in error.response) {
+        errorDetails = JSON.stringify(error.response.data);
+      }
+      console.error('WEBHOOK-DEBUG: Error details:', errorDetails);
     }
     
     return { success: false, error };
@@ -184,7 +193,11 @@ async function extractCustomerEmail(session: any, stripe: Stripe) {
         return customer.email;
       }
     } catch (error) {
-      console.error('WEBHOOK-DEBUG: Error retrieving customer:', error.message);
+      console.error('WEBHOOK-DEBUG: Error retrieving customer:', 
+        error && typeof error === 'object' && 'message' in error 
+          ? error.message 
+          : 'Unknown error'
+      );
     }
   }
   
@@ -251,7 +264,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   
   const stripe = new Stripe(stripeSecretKey, {
-    apiVersion: '2023-10-16',
+    apiVersion: '2025-02-24.acacia',
   });
   
   // Get webhook secret
@@ -338,10 +351,31 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     // Return success
     console.log('WEBHOOK-DEBUG: Returning 200 success response');
     return res.status(200).json({ received: true });
-  } catch (err: any) {
-    console.error(`WEBHOOK-DEBUG: ❌ Error processing webhook: ${err.message}`);
-    console.error(err.stack);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+  } catch (error) {
+    console.error('WEBHOOK-DEBUG: Error processing webhook:', error);
+    
+    // Log detailed error information
+    if (error && typeof error === 'object' && 'response' in error && 
+        error.response && typeof error.response === 'object') {
+      if ('status' in error.response) {
+        console.error('WEBHOOK-DEBUG: Error status:', error.response.status);
+      }
+      let errorDetails = '';
+      if ('text' in error.response && error.response.text && typeof error.response.text === 'string') {
+        errorDetails = error.response.text;
+      } else if ('data' in error.response) {
+        errorDetails = JSON.stringify(error.response.data);
+      }
+      console.error('WEBHOOK-DEBUG: Error details:', errorDetails);
+    }
+    
+    let errorMessage = 'Unknown error';
+    if (typeof error === 'object' && error !== null && 'message' in error && 
+        typeof error.message === 'string') {
+      errorMessage = error.message;
+    }
+    
+    return res.status(400).send(`Webhook Error: ${errorMessage}`);
   }
 };
 

@@ -29,7 +29,7 @@ function getStripeKeys(): { secretKey: string | undefined; webhookSecret: string
 }
 
 // Initialize Brevo API client with error handling
-function initializeBrevoClient(): SibApiV3Sdk.TransactionalEmailsApi {
+function initializeBrevoClient(): any {
   try {
     const defaultClient = SibApiV3Sdk.ApiClient.instance;
     const apiKey = defaultClient.authentications['api-key'];
@@ -253,7 +253,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse): Promis
     
     // Initialize Stripe
     const stripe = new Stripe(secretKey, {
-      apiVersion: '2023-10-16' as Stripe.ApiVersion,
+      apiVersion: '2025-02-24.acacia' as any,
     });
     
     // Get raw body for signature verification

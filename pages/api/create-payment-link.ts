@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const secretKey = getStripeKey();
     const stripe = new Stripe(secretKey as string, {
-      apiVersion: '2023-10-16' as any,
+      apiVersion: '2025-02-24.acacia' as any,
     });
 
     // Create a payment link with the provided parameters

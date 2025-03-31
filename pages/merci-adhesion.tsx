@@ -96,9 +96,15 @@ const BackToHomeButton = styled.a`
   }
 `;
 
+const ReferenceNumber = styled.div`
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+`;
+
 const MerciAdhesion: React.FC = () => {
   const router = useRouter();
-  const { type } = router.query;
+  const { type, session_id } = router.query;
   const [membershipType, setMembershipType] = useState<string>('');
   const [price, setPrice] = useState<string>('');
   
@@ -106,10 +112,10 @@ const MerciAdhesion: React.FC = () => {
     if (type) {
       if (type === 'digital') {
         setMembershipType('Adhésion Numérique');
-        setPrice('5€');
+        setPrice('10€');
       } else if (type === 'classic') {
         setMembershipType('Adhésion Classique');
-        setPrice('32€');
+        setPrice('25€');
       }
     }
   }, [type]);
@@ -130,6 +136,38 @@ const MerciAdhesion: React.FC = () => {
     month: 'long',
     day: 'numeric'
   });
+  
+  const initiateCheckout = async (
+    membershipType: 'digital' | 'classic',
+    email: string,
+    name: string = ''
+  ) => {
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          membershipType, // 'digital' or 'classic'
+          email,          // customer email
+          name,           // optional customer name
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error creating checkout session');
+      }
+
+      // Redirect to Stripe Checkout
+      window.location.href = data.url;
+    } catch (error) {
+      console.error('Checkout error:', error);
+      // Handle error (show message to user)
+    }
+  };
   
   return (
     <PageContainer>
@@ -168,6 +206,11 @@ const MerciAdhesion: React.FC = () => {
             <DetailItem><strong>Montant :</strong> {price}</DetailItem>
             <DetailItem><strong>Date d'adhésion :</strong> {formattedDate}</DetailItem>
             <DetailItem><strong>Valable jusqu'au :</strong> {formattedExpirationDate}</DetailItem>
+            {session_id && (
+              <ReferenceNumber>
+                <strong>Référence de paiement :</strong> {session_id}
+              </ReferenceNumber>
+            )}
           </MembershipDetails>
         )}
         
