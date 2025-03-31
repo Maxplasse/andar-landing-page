@@ -159,8 +159,8 @@ const MembershipSection: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            priceId: 'price_1R4eb6Cw2RExVENhDbJpEgyB', // Digital membership price ID
-            successUrl: `${baseUrl}/merci-adhesion?type=digital`,
+            membershipType: 'digital',
+            successUrl: `${baseUrl}/merci-adhesion`,
             cancelUrl: `${baseUrl}/#adhesion`
           }),
         });
@@ -171,8 +171,8 @@ const MembershipSection: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            priceId: 'price_1R4ec7Cw2RExVENhBXUIPDoL', // Classic membership price ID
-            successUrl: `${baseUrl}/merci-adhesion?type=classic`,
+            membershipType: 'classic',
+            successUrl: `${baseUrl}/merci-adhesion`,
             cancelUrl: `${baseUrl}/#adhesion`
           }),
         });
@@ -209,7 +209,7 @@ const MembershipSection: React.FC = () => {
       <MembershipCardsContainer>
         <MembershipCard variant="digital">
           <CardTitle>Adhésion Numérique</CardTitle>
-          <CardPrice>5€<span>/an</span></CardPrice>
+          <CardPrice>10€<span>/an</span></CardPrice>
           
           {isLoading ? (
             <LoadingButton variant="digital">Chargement...</LoadingButton>
@@ -235,7 +235,7 @@ const MembershipSection: React.FC = () => {
 
         <MembershipCard variant="classic">
           <CardTitle>Adhésion Classique</CardTitle>
-          <CardPrice>32€<span>/an</span></CardPrice>
+          <CardPrice>25€<span>/an</span></CardPrice>
           
           {isLoading ? (
             <LoadingButton variant="classic">Chargement...</LoadingButton>
