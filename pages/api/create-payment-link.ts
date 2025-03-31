@@ -20,9 +20,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { priceId, successUrl, cancelUrl } = req.body;
+    const { membershipType, successUrl, cancelUrl, customerEmail, customerName } = req.body;
 
-    if (!priceId || !successUrl || !cancelUrl) {
+    if (!membershipType || !successUrl || !cancelUrl) {
       return res.status(400).json({ error: 'Missing required parameters' });
     }
 
@@ -31,36 +31,58 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       apiVersion: '2025-02-24.acacia' as any,
     });
 
+    // Set price and product details based on membership type
+    let amount;
+    let productName;
+
+    if (membershipType === 'digital') {
+      amount = 1000; // 10€ in cents
+      productName = 'Adhésion Numérique ANDAR';
+    } else if (membershipType === 'classic') {
+      amount = 2500; // 25€ in cents
+      productName = 'Adhésion Classique ANDAR';
+    } else {
+      return res.status(400).json({ error: 'Invalid membership type' });
+    }
+
     // Create a payment link with the provided parameters
-    const paymentLink = await stripe.checkout.sessions.create({
+    const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          price: priceId,
+          price_data: {
+            currency: 'eur',
+            product_data: {
+              name: productName,
+            },
+            unit_amount: amount,
+          },
           quantity: 1,
         },
       ],
-      mode: 'subscription',
-      success_url: successUrl,
+      mode: 'payment',
+      success_url: `${successUrl}?type=${membershipType}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: cancelUrl,
       // Collect customer information during checkout
       billing_address_collection: 'required',
-      customer_email: req.body.customerEmail || undefined,
+      customer_email: customerEmail || undefined,
       // Add metadata if needed
       metadata: {
+        membershipType,
+        name: customerName || '',
         source: 'andar_website',
         environment: isProduction ? 'production' : 'test'
       },
     });
 
     console.log(`Payment link created:
-      ID: ${paymentLink.id}
-      URL: ${paymentLink.url}
+      ID: ${session.id}
+      URL: ${session.url}
       Environment: ${isProduction ? 'Production' : 'Test'}
     `);
 
     res.status(200).json({
-      id: paymentLink.id,
-      url: paymentLink.url,
+      id: session.id,
+      url: session.url,
     });
   } catch (error: any) {
     console.error('Error creating payment link:', error);
