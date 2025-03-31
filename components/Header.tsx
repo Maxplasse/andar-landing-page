@@ -109,7 +109,7 @@ const Header: React.FC = () => {
 
   // Function to scroll to the adhesion section
   const scrollToAdhesion = () => {
-    const adhesionSection = document.getElementById('adhesion');
+    const adhesionSection = document.getElementById('andar-membership');
     if (adhesionSection) {
       adhesionSection.scrollIntoView({ behavior: 'smooth' });
     }

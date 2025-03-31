@@ -15,6 +15,13 @@ export default function Document() {
           }}
         />
         {/* End Google Tag Manager */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          #andar-membership {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+        `}} />
       </Head>
       <body>
         {/* Google Tag Manager (noscript) */}

@@ -5,6 +5,7 @@ import IntroSection from '@/components/IntroSection';
 import InfoSection from '@/components/InfoSection';
 import WhyJoinSection from '@/components/WhyJoinSection';
 import MembershipSection from '@/components/MembershipSection';
+import TestimonialSection from '@/components/TestimonialSection';
 import Footer from '@/components/Footer';
 import MissionsSection from '@/components/MissionsSection';
 import LegalFooter from '@/components/LegalFooter';
@@ -24,6 +25,7 @@ export default function Home() {
         <InfoSection />
         <WhyJoinSection />
         <MembershipSection />
+        <TestimonialSection />
         <Footer />
         <MissionsSection />
         <LegalFooter />

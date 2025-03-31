@@ -166,7 +166,7 @@ const MembershipSection: React.FC = () => {
           body: JSON.stringify({
             membershipType: 'digital',
             successUrl: `${baseUrl}/merci-adhesion`,
-            cancelUrl: `${baseUrl}/#adhesion`
+            cancelUrl: `${baseUrl}/#andar-membership`
           }),
         });
         
@@ -178,7 +178,7 @@ const MembershipSection: React.FC = () => {
           body: JSON.stringify({
             membershipType: 'classic',
             successUrl: `${baseUrl}/merci-adhesion`,
-            cancelUrl: `${baseUrl}/#adhesion`
+            cancelUrl: `${baseUrl}/#andar-membership`
           }),
         });
 
@@ -224,8 +224,24 @@ const MembershipSection: React.FC = () => {
     createPaymentLinks();
   }, []);
   
+  useEffect(() => {
+    // Log to verify this effect is running
+    console.log('MembershipSection mounted');
+    
+    // Force section visibility with minimal necessary code
+    const section = document.getElementById('andar-membership');
+    if (section) {
+      section.style.cssText = `
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 9999 !important;
+      `;
+    }
+  }, []);
+  
   return (
-    <SectionContainer id="adhesion">
+    <SectionContainer id="andar-membership">
       <SectionTitle>Quelles <HighlightedText>formules d'adhésion</HighlightedText> à l'ANDAR ?</SectionTitle>
       
       <MembershipCardsContainer>
