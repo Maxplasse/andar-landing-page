@@ -8,6 +8,11 @@ const SectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
+  min-height: 300px;
+  width: 100%;
 `;
 
 const SectionTitle = styled.h2`
@@ -181,10 +186,27 @@ const MembershipSection: React.FC = () => {
           const digitalData = await digitalResponse.json();
           const classicData = await classicResponse.json();
           
+          console.log('Digital membership link:', digitalData.url);
+          console.log('Classic membership link:', classicData.url);
+          
           setDigitalMembershipLink(digitalData.url);
           setClassicMembershipLink(classicData.url);
         } else {
           console.error('Failed to create payment links');
+          console.error('Digital response status:', digitalResponse.status);
+          console.error('Classic response status:', classicResponse.status);
+          
+          // Attempt to get error details
+          try {
+            const digitalError = await digitalResponse.json();
+            console.error('Digital error:', digitalError);
+          } catch (e) {}
+          
+          try {
+            const classicError = await classicResponse.json();
+            console.error('Classic error:', classicError);
+          } catch (e) {}
+          
           // Fallback to static links if API fails
           setDigitalMembershipLink("https://buy.stripe.com/test_00g14R9VW6BDexabIJ");
           setClassicMembershipLink("https://buy.stripe.com/test_5kA5l7b00aRT60E9AC");
@@ -209,7 +231,7 @@ const MembershipSection: React.FC = () => {
       <MembershipCardsContainer>
         <MembershipCard variant="digital">
           <CardTitle>Adhésion Numérique</CardTitle>
-          <CardPrice>10€<span>/an</span></CardPrice>
+          <CardPrice>5€<span>/an</span></CardPrice>
           
           {isLoading ? (
             <LoadingButton variant="digital">Chargement...</LoadingButton>
@@ -235,7 +257,7 @@ const MembershipSection: React.FC = () => {
 
         <MembershipCard variant="classic">
           <CardTitle>Adhésion Classique</CardTitle>
-          <CardPrice>25€<span>/an</span></CardPrice>
+          <CardPrice>32€<span>/an</span></CardPrice>
           
           {isLoading ? (
             <LoadingButton variant="classic">Chargement...</LoadingButton>

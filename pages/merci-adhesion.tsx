@@ -112,10 +112,10 @@ const MerciAdhesion: React.FC = () => {
     if (type) {
       if (type === 'digital') {
         setMembershipType('Adhésion Numérique');
-        setPrice('10€');
+        setPrice('5€');
       } else if (type === 'classic') {
         setMembershipType('Adhésion Classique');
-        setPrice('25€');
+        setPrice('32€');
       }
     }
   }, [type]);

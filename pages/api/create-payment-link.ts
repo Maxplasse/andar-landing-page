@@ -36,10 +36,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let productName;
 
     if (membershipType === 'digital') {
-      amount = 1000; // 10€ in cents
+      amount = 500; // 5€ in cents
       productName = 'Adhésion Numérique ANDAR';
     } else if (membershipType === 'classic') {
-      amount = 2500; // 25€ in cents
+      amount = 3200; // 32€ in cents
       productName = 'Adhésion Classique ANDAR';
     } else {
       return res.status(400).json({ error: 'Invalid membership type' });
