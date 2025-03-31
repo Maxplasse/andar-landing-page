@@ -5,25 +5,5 @@
       "src": "package.json",
       "use": "@vercel/next"
     }
-  ],
-  "env": {
-    "STRIPE_SECRET_KEY": "@stripe-secret-key",
-    "STRIPE_PUBLISHABLE_KEY": "@stripe-publishable-key",
-    "STRIPE_WEBHOOK_SECRET": "@stripe-webhook-secret",
-    "STRIPE_LIVE_WEBHOOK_SECRET": "@stripe-live-webhook-secret",
-    "BREVO_API_KEY": "@brevo-api-key",
-    "BREVO_SENDER_EMAIL": "@brevo-sender-email",
-    "BREVO_SENDER_NAME": "@brevo-sender-name"
-  },
-  "build": {
-    "env": {
-      "STRIPE_SECRET_KEY": "@stripe-secret-key",
-      "STRIPE_PUBLISHABLE_KEY": "@stripe-publishable-key",
-      "STRIPE_WEBHOOK_SECRET": "@stripe-webhook-secret",
-      "STRIPE_LIVE_WEBHOOK_SECRET": "@stripe-live-webhook-secret",
-      "BREVO_API_KEY": "@brevo-api-key",
-      "BREVO_SENDER_EMAIL": "@brevo-sender-email",
-      "BREVO_SENDER_NAME": "@brevo-sender-name"
-    }
-  }
+  ]
 } 
