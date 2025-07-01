@@ -34,10 +34,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (membershipType === 'digital') {
       amount = 500; // 5€ in cents
-      productName = 'Adhésion Numérique ANDAR';
+      productName = 'Adhésion Numérique ANDAR – Revue, Webconférences, Ressources, MaPatho Plus';
     } else if (membershipType === 'classic') {
       amount = 3200; // 32€ in cents
-      productName = 'Adhésion Classique ANDAR';
+      productName = 'Adhésion Classique ANDAR – Version papier + numérique, Webconférences, Ressources, MaPatho Plus';
     } else {
       return res.status(400).json({ error: 'Invalid membership type' });
     }
