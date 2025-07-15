@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Email Sending</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      min-height: 100px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Email Sending</h1>
+  <p>This page will test email sending directly without going through Stripe checkout.</p>
+  
+  <form id="email-form">
+    <div>
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" value="max.plasse@viennou.com" required>
+    </div>
+    
+    <div>
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" value="Max Plasse" required>
+    </div>
+    
+    <div>
+      <label for="membershipType">Membership Type:</label>
+      <select id="membershipType" name="membershipType" required>
+        <option value="digital">Digital (5€)</option>
+        <option value="classic">Classic (32€)</option>
+      </select>
+    </div>
+    
+    <button type="submit">Send Test Email</button>
+  </form>
+
+  <div id="result">
+    <p>Results will appear here...</p>
+  </div>
+
+  <script>
+    document.getElementById('email-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = 'Sending email...';
+      
+      const email = document.getElementById('email').value;
+      const name = document.getElementById('name').value;
+      const membershipType = document.getElementById('membershipType').value;
+      
+      try {
+        const response = await fetch('/api/test-checkout-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, name, membershipType }),
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          resultDiv.innerHTML = `
+            <h3>✅ Success!</h3>
+            <p>${data.message}</p>
+            <p>Message ID: ${data.data?.messageId || 'Not available'}</p>
+            <p>Check your inbox (and spam folder) for the confirmation email.</p>
+          `;
+        } else {
+          resultDiv.innerHTML = `
+            <h3>❌ Error</h3>
+            <p>${data.message}</p>
+            <pre>${JSON.stringify(data.error, null, 2)}</pre>
+          `;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `
+          <h3>❌ Error</h3>
+          <p>An unexpected error occurred:</p>
+          <pre>${error.message}</pre>
+        `;
+      }
+    });
+  </script>
+</body>
+</html> 

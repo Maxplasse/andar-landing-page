@@ -29,7 +29,7 @@ function getStripeKeys(): { secretKey: string | undefined; webhookSecret: string
 }
 
 // Initialize Brevo API client with error handling
-function initializeBrevoClient(): SibApiV3Sdk.TransactionalEmailsApi {
+function initializeBrevoClient(): any {
   try {
     const defaultClient = SibApiV3Sdk.ApiClient.instance;
     const apiKey = defaultClient.authentications['api-key'];
@@ -185,14 +185,14 @@ function getMembershipDetails(membershipType: string): {
     case 'digital':
       return {
         name: "Adhésion Numérique",
-        price: "10€",
+        price: "5€",
         description: "Accès à tous les services numériques ANDAR",
         duration: "1 an"
       };
     case 'classic':
       return {
         name: "Adhésion Classique",
-        price: "25€",
+        price: "32€",
         description: "Adhésion complète à ANDAR",
         duration: "1 an"
       };
@@ -222,8 +222,8 @@ function determineMembershipType(session: any): string {
   
   // Then check based on amount
   if (session.amount_total) {
-    if (session.amount_total === 1000) return 'digital';
-    if (session.amount_total === 2500) return 'classic';
+    if (session.amount_total === 500) return 'digital';
+    if (session.amount_total === 3200) return 'classic';
     if (session.amount_total >= 5000) return 'premium';
   }
   
@@ -253,7 +253,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse): Promis
     
     // Initialize Stripe
     const stripe = new Stripe(secretKey, {
-      apiVersion: '2023-10-16' as Stripe.ApiVersion,
+      apiVersion: '2025-02-24.acacia' as any,
     });
     
     // Get raw body for signature verification

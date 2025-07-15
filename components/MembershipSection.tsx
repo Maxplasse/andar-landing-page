@@ -8,6 +8,11 @@ const SectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
+  min-height: 300px;
+  width: 100%;
 `;
 
 const SectionTitle = styled.h2`
@@ -159,9 +164,9 @@ const MembershipSection: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            priceId: 'price_1R4eb6Cw2RExVENhDbJpEgyB', // Digital membership price ID
-            successUrl: `${baseUrl}/merci-adhesion?type=digital`,
-            cancelUrl: `${baseUrl}/#adhesion`
+            membershipType: 'digital',
+            successUrl: `${baseUrl}/merci-adhesion`,
+            cancelUrl: `${baseUrl}/#andar-membership`
           }),
         });
         
@@ -171,9 +176,9 @@ const MembershipSection: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            priceId: 'price_1R4ec7Cw2RExVENhBXUIPDoL', // Classic membership price ID
-            successUrl: `${baseUrl}/merci-adhesion?type=classic`,
-            cancelUrl: `${baseUrl}/#adhesion`
+            membershipType: 'classic',
+            successUrl: `${baseUrl}/merci-adhesion`,
+            cancelUrl: `${baseUrl}/#andar-membership`
           }),
         });
 
@@ -181,10 +186,27 @@ const MembershipSection: React.FC = () => {
           const digitalData = await digitalResponse.json();
           const classicData = await classicResponse.json();
           
+          console.log('Digital membership link:', digitalData.url);
+          console.log('Classic membership link:', classicData.url);
+          
           setDigitalMembershipLink(digitalData.url);
           setClassicMembershipLink(classicData.url);
         } else {
           console.error('Failed to create payment links');
+          console.error('Digital response status:', digitalResponse.status);
+          console.error('Classic response status:', classicResponse.status);
+          
+          // Attempt to get error details
+          try {
+            const digitalError = await digitalResponse.json();
+            console.error('Digital error:', digitalError);
+          } catch (e) {}
+          
+          try {
+            const classicError = await classicResponse.json();
+            console.error('Classic error:', classicError);
+          } catch (e) {}
+          
           // Fallback to static links if API fails
           setDigitalMembershipLink("https://buy.stripe.com/test_00g14R9VW6BDexabIJ");
           setClassicMembershipLink("https://buy.stripe.com/test_5kA5l7b00aRT60E9AC");
@@ -202,8 +224,24 @@ const MembershipSection: React.FC = () => {
     createPaymentLinks();
   }, []);
   
+  useEffect(() => {
+    // Log to verify this effect is running
+    console.log('MembershipSection mounted');
+    
+    // Force section visibility with minimal necessary code
+    const section = document.getElementById('andar-membership');
+    if (section) {
+      section.style.cssText = `
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 9999 !important;
+      `;
+    }
+  }, []);
+  
   return (
-    <SectionContainer id="adhesion">
+    <SectionContainer id="andar-membership">
       <SectionTitle>Quelles <HighlightedText>formules d'adhésion</HighlightedText> à l'ANDAR ?</SectionTitle>
       
       <MembershipCardsContainer>

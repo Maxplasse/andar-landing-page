@@ -52,7 +52,7 @@ export default function MentionsLegales() {
     <PageContainer>
       <Head>
         <title>Mentions Légales | ANDAR</title>
-        <meta name="description" content="Mentions légales de l'ANDAR, Association nationale de défense contre la polyarthrite rhumatoïde." />
+        <meta name="description" content="Mentions légales de l'ANDAR, Association Nationale de Défense contre la polyArthrite Rhumatoïde." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -77,7 +77,7 @@ export default function MentionsLegales() {
         
         <SectionTitle>Directeur de la publication</SectionTitle>
         <Paragraph>
-          Président de l'ANDAR
+          Danielle Vacher - Présidente de l'ANDAR
         </Paragraph>
         
         <SectionTitle>Conception et réalisation</SectionTitle>

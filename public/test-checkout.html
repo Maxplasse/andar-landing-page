@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Checkout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test ANDAR Checkout</h1>
+  
+  <form id="checkout-form">
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="max.plasse@viennou.com" required>
+    </div>
+    
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="Max Plasse" required>
+    </div>
+    
+    <div>
+      <label for="membershipType">Membership Type:</label>
+      <select id="membershipType" name="membershipType" required>
+        <option value="digital">Digital (5€)</option>
+        <option value="classic">Classic (32€)</option>
+      </select>
+    </div>
+    
+    <button type="submit">Proceed to Checkout</button>
+  </form>
+
+  <script>
+    document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const name = document.getElementById('name').value;
+      const membershipType = document.getElementById('membershipType').value;
+      
+      try {
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, name, membershipType }),
+        });
+        
+        const data = await response.json();
+        
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert('Error creating checkout session: ' + JSON.stringify(data));
+        }
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    });
+  </script>
+</body>
+</html> 

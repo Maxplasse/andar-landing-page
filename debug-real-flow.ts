@@ -13,7 +13,7 @@ config({ path: '.env.local' });
 // Set up Stripe with the same key as the webhook handler
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY as string;
 const stripe = new Stripe(stripeSecretKey, {
-  apiVersion: '2023-10-16',
+  apiVersion: '2025-02-24.acacia',
 });
 
 console.log('=== DEBUG REAL CHECKOUT FLOW (TS) ===');
@@ -223,9 +223,14 @@ async function testWebhookHandlerDirectly(): Promise<boolean> {
         return true;
       } catch (webhookError) {
         console.error('❌ Error posting to webhook endpoint:', webhookError);
-        if (webhookError.response) {
-          console.error('Response status:', webhookError.response.status);
-          console.error('Response data:', webhookError.response.data);
+        if (webhookError && typeof webhookError === 'object' && 'response' in webhookError &&
+            webhookError.response && typeof webhookError.response === 'object') {
+          if ('status' in webhookError.response) {
+            console.error('Response status:', webhookError.response.status);
+          }
+          if ('data' in webhookError.response) {
+            console.error('Response data:', webhookError.response.data);
+          }
         }
         return false;
       }
@@ -264,9 +269,14 @@ async function testWebhookHandlerDirectly(): Promise<boolean> {
       return true;
     } catch (webhookError) {
       console.error('❌ Error posting to webhook endpoint:', webhookError);
-      if (webhookError.response) {
-        console.error('Response status:', webhookError.response.status);
-        console.error('Response data:', webhookError.response.data);
+      if (webhookError && typeof webhookError === 'object' && 'response' in webhookError &&
+          webhookError.response && typeof webhookError.response === 'object') {
+        if ('status' in webhookError.response) {
+          console.error('Response status:', webhookError.response.status);
+        }
+        if ('data' in webhookError.response) {
+          console.error('Response data:', webhookError.response.data);
+        }
       }
       return false;
     }
@@ -412,11 +422,21 @@ async function testWebhookVerification(): Promise<boolean> {
           }
         });
         
-        console.log('Unexpected success with fake signature! Response:', response.status);
+        console.log('⚠️ Test webhook verification bypassed with fake signature!');
         console.log('This suggests signature verification might be bypassed');
       } catch (error) {
-        console.log('Expected error with fake signature (this is good):', error.response?.status);
-        console.log('Error message:', error.response?.data);
+        console.log('Expected error with fake signature (this is good):');
+        if (error && typeof error === 'object' && 'response' in error &&
+            error.response && typeof error.response === 'object') {
+          if ('status' in error.response) {
+            console.log('Response status:', error.response.status);
+          }
+          if ('data' in error.response) {
+            console.log('Error data:', error.response.data);
+          }
+        } else {
+          console.log('Error:', error);
+        }
       }
     }
     
@@ -436,15 +456,31 @@ async function testWebhookVerification(): Promise<boolean> {
       console.log('Debug mode response data:', response.data);
       console.log('✅ Debug mode is working correctly');
     } catch (error) {
-      console.error('❌ Debug mode failed:', error.response?.status);
-      console.error('Error message:', error.response?.data);
+      console.error('❌ Debug mode failed:');
+      if (error && typeof error === 'object') {
+        console.error(error);
+        if ('message' in error) {
+          console.error('Error message:', error.message);
+        }
+      } else {
+        console.error(error);
+      }
+      return false;
     }
     
     process.env.DEBUG_WEBHOOK = 'false';
     
     return true;
   } catch (error) {
-    console.error('❌ Error in webhook verification test:', error);
+    console.error('❌ Error in webhook verification test:');
+    if (error && typeof error === 'object') {
+      console.error(error);
+      if ('message' in error) {
+        console.error('Error message:', error.message);
+      }
+    } else {
+      console.error(error);
+    }
     return false;
   }
 }
