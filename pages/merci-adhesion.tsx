@@ -206,11 +206,6 @@ const MerciAdhesion: React.FC = () => {
             <DetailItem><strong>Montant :</strong> {price}</DetailItem>
             <DetailItem><strong>Date d'adhésion :</strong> {formattedDate}</DetailItem>
             <DetailItem><strong>Valable jusqu'au :</strong> {formattedExpirationDate}</DetailItem>
-            {session_id && (
-              <ReferenceNumber>
-                <strong>Référence de paiement :</strong> {session_id}
-              </ReferenceNumber>
-            )}
           </MembershipDetails>
         )}
         

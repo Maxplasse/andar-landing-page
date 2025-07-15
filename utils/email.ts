@@ -182,14 +182,14 @@ function getMembershipDetails(membershipType: string) {
     case 'digital':
       return {
         name: 'Adhésion Numérique',
-        price: '10€',
+        price: '5€',
         description: 'Accès à tous les services numériques ANDAR',
         duration: '1 an',
       };
     case 'classic':
       return {
         name: 'Adhésion Classique',
-        price: '25€',
+        price: '32€',
         description: 'Adhésion complète à ANDAR avec tous les avantages',
         duration: '1 an',
       };
